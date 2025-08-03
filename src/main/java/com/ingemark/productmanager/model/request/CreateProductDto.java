@@ -1,4 +1,4 @@
-package com.ingemark.productmanager.model;
+package com.ingemark.productmanager.model.request;
 
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;

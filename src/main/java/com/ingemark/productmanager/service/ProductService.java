@@ -3,7 +3,13 @@ package com.ingemark.productmanager.service;
 import com.ingemark.productmanager.exception.ProductNotFoundException;
 import com.ingemark.productmanager.mapper.ProductMapper;
 import com.ingemark.productmanager.model.*;
+import com.ingemark.productmanager.model.request.CreateProductDto;
+import com.ingemark.productmanager.model.request.SearchProductDto;
+import com.ingemark.productmanager.model.request.UpdateProductDto;
+import com.ingemark.productmanager.model.response.PagedProductResponseDto;
+import com.ingemark.productmanager.model.response.ProductResponseDto;
 import com.ingemark.productmanager.repository.ProductRepository;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,8 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 
-import static com.ingemark.productmanager.model.SearchProductDto.DEFAULT_PAGE;
-import static com.ingemark.productmanager.model.SearchProductDto.DEFAULT_SIZE;
+import static com.ingemark.productmanager.model.request.SearchProductDto.DEFAULT_PAGE;
+import static com.ingemark.productmanager.model.request.SearchProductDto.DEFAULT_SIZE;
 import static java.util.Objects.nonNull;
 
 @Service
@@ -55,6 +61,25 @@ public class ProductService {
         product.setCode(fromSequence(productRepository.getNextCodeSequence()));
         Product savedProduct = productRepository.save(product);
         return productMapper.toResponseDto(savedProduct);
+    }
+
+    @Transactional
+    public ProductResponseDto updateProductByCode(String code, @Valid UpdateProductDto updateProductDto) {
+        Product product = productRepository.findByCode(code)
+                .orElseThrow(() -> new ProductNotFoundException(code));
+        product.setName(updateProductDto.name());
+        product.setPriceEur(updateProductDto.priceEur());
+        //TODO Calculate USD price using HNB API
+        product.setPriceUsd(BigDecimal.ONE);
+        product.setIsAvailable(updateProductDto.isAvailable());
+        return productMapper.toResponseDto(product);
+    }
+
+    @Transactional
+    public void deleteProductByCode(String code) {
+        Product product = productRepository.findByCode(code)
+                .orElseThrow(() -> new ProductNotFoundException(code));
+        productRepository.delete(product);
     }
 
     /**

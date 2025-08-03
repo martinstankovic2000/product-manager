@@ -1,10 +1,11 @@
 package com.ingemark.productmanager.controller;
 
-import com.ingemark.productmanager.model.CreateProductDto;
+import com.ingemark.productmanager.model.request.CreateProductDto;
 
-import com.ingemark.productmanager.model.PagedProductResponseDto;
-import com.ingemark.productmanager.model.ProductResponseDto;
-import com.ingemark.productmanager.model.SearchProductDto;
+import com.ingemark.productmanager.model.request.UpdateProductDto;
+import com.ingemark.productmanager.model.response.PagedProductResponseDto;
+import com.ingemark.productmanager.model.response.ProductResponseDto;
+import com.ingemark.productmanager.model.request.SearchProductDto;
 import com.ingemark.productmanager.service.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -38,6 +39,19 @@ public class ProductController {
     public ResponseEntity<PagedProductResponseDto> searchProducts(@Valid @RequestBody(required = false) SearchProductDto searchDto) {
 
         return ResponseEntity.ok(productService.searchProducts(searchDto));
+    }
+
+    @PutMapping("/{code}")
+    public ResponseEntity<ProductResponseDto> updateProductByCode(@PathVariable String code, @Valid @RequestBody UpdateProductDto updateProductDto) {
+
+        return ResponseEntity.ok(productService.updateProductByCode(code, updateProductDto));
+    }
+
+    @DeleteMapping("/{code}")
+    public ResponseEntity<Void> deleteProductByCode(@PathVariable String code) {
+
+        productService.deleteProductByCode(code);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
 }

@@ -1,4 +1,4 @@
-package com.ingemark.productmanager.model;
+package com.ingemark.productmanager.model.response;
 
 import java.math.BigDecimal;
 
