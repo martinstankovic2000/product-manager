@@ -13,7 +13,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Optional<Product> findByCode(String code);
 
-    List<Product> findByName(String name);
+    List<Product> findByNameIgnoreCaseContaining(String name);
 
     @Query(value = "SELECT nextval('product_code_2025_seq')", nativeQuery = true)
     Long getNextCodeSequence();
