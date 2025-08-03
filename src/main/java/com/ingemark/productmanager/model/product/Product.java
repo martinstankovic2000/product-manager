@@ -1,4 +1,4 @@
-package com.ingemark.productmanager.model;
+package com.ingemark.productmanager.model.product;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

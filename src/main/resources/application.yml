@@ -26,6 +26,15 @@ spring:
 server:
   port: 8080
 
+app:
+  admin:
+    username: ${ADMIN_USERNAME}
+    email: ${ADMIN_EMAIL}
+    password: ${ADMIN_PASSWORD}
+    create-on-startup: true
+  jwtSecret: ${JWT_SECRET}
+  jwtExpirationInMs: ${JWT_DURATION}
+
 # HNB API
 hnb:
   api:

@@ -1,6 +1,6 @@
-package com.ingemark.productmanager.model.request;
+package com.ingemark.productmanager.model.product.request;
 
-import com.ingemark.productmanager.model.ProductSortField;
+import com.ingemark.productmanager.model.product.ProductSortField;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 

@@ -2,12 +2,13 @@ package com.ingemark.productmanager.service;
 
 import com.ingemark.productmanager.exception.ProductNotFoundException;
 import com.ingemark.productmanager.mapper.ProductMapper;
-import com.ingemark.productmanager.model.*;
-import com.ingemark.productmanager.model.request.CreateProductDto;
-import com.ingemark.productmanager.model.request.SearchProductDto;
-import com.ingemark.productmanager.model.request.UpdateProductDto;
-import com.ingemark.productmanager.model.response.PagedProductResponseDto;
-import com.ingemark.productmanager.model.response.ProductResponseDto;
+import com.ingemark.productmanager.model.product.Product;
+import com.ingemark.productmanager.model.product.ProductSortField;
+import com.ingemark.productmanager.model.product.request.CreateProductDto;
+import com.ingemark.productmanager.model.product.request.SearchProductDto;
+import com.ingemark.productmanager.model.product.request.UpdateProductDto;
+import com.ingemark.productmanager.model.product.response.PagedProductResponseDto;
+import com.ingemark.productmanager.model.product.response.ProductResponseDto;
 import com.ingemark.productmanager.repository.ProductRepository;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -18,10 +19,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
-
-import static com.ingemark.productmanager.model.request.SearchProductDto.DEFAULT_PAGE;
-import static com.ingemark.productmanager.model.request.SearchProductDto.DEFAULT_SIZE;
+import static com.ingemark.productmanager.model.product.request.SearchProductDto.DEFAULT_PAGE;
+import static com.ingemark.productmanager.model.product.request.SearchProductDto.DEFAULT_SIZE;
 import static java.util.Objects.nonNull;
 
 @Service

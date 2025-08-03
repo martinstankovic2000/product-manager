@@ -1,6 +1,6 @@
 package com.ingemark.productmanager.repository;
 
-import com.ingemark.productmanager.model.Product;
+import com.ingemark.productmanager.model.product.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

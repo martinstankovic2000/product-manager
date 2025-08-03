@@ -1,4 +1,4 @@
-package com.ingemark.productmanager.model.response;
+package com.ingemark.productmanager.model.product.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

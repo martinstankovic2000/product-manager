@@ -1,6 +1,6 @@
 package com.ingemark.productmanager.service;
 
-import com.ingemark.productmanager.model.response.HnbRateResponse;
+import com.ingemark.productmanager.model.product.response.HnbRateResponse;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

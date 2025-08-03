@@ -1,9 +1,9 @@
 package com.ingemark.productmanager.mapper;
 
-import com.ingemark.productmanager.model.request.CreateProductDto;
-import com.ingemark.productmanager.model.response.PagedProductResponseDto;
-import com.ingemark.productmanager.model.Product;
-import com.ingemark.productmanager.model.response.ProductResponseDto;
+import com.ingemark.productmanager.model.product.request.CreateProductDto;
+import com.ingemark.productmanager.model.product.response.PagedProductResponseDto;
+import com.ingemark.productmanager.model.product.Product;
+import com.ingemark.productmanager.model.product.response.ProductResponseDto;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
