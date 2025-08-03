@@ -4,6 +4,12 @@ spring:
     username: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
     driver-class-name: org.postgresql.Driver
+  messages:
+    basename: messages
+    encoding: UTF-8
+    cache-duration: 3600
+    fallback-to-system-locale: false
+    always-use-message-format: true
 
   jpa:
     hibernate:
