@@ -29,4 +29,4 @@ server:
 # HNB API
 hnb:
   api:
-    url: https://api.hnb.hr/tecajn-eur/v3
+    url: https://api.hnb.hr/tecajn-eur/v3?valuta=

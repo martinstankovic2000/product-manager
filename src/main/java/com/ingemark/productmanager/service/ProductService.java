@@ -30,6 +30,7 @@ public class ProductService {
 
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
+    private final CurrencyService currencyService;
 
 
     @Transactional(readOnly = true)
@@ -56,8 +57,7 @@ public class ProductService {
     @Transactional
     public ProductResponseDto createProduct(CreateProductDto createProductDto) {
         Product product = productMapper.toEntity(createProductDto);
-        //TODO Calculate USD price using HNB API
-        product.setPriceUsd(BigDecimal.ONE);
+        product.setPriceUsd(currencyService.calculateUsdPrice(createProductDto.priceEur()));
         product.setCode(fromSequence(productRepository.getNextCodeSequence()));
         Product savedProduct = productRepository.save(product);
         return productMapper.toResponseDto(savedProduct);
@@ -69,8 +69,7 @@ public class ProductService {
                 .orElseThrow(() -> new ProductNotFoundException(code));
         product.setName(updateProductDto.name());
         product.setPriceEur(updateProductDto.priceEur());
-        //TODO Calculate USD price using HNB API
-        product.setPriceUsd(BigDecimal.ONE);
+        product.setPriceUsd(currencyService.calculateUsdPrice(updateProductDto.priceEur()));
         product.setIsAvailable(updateProductDto.isAvailable());
         return productMapper.toResponseDto(product);
     }
