@@ -36,7 +36,14 @@ public class ProductService {
     public PagedProductResponseDto searchProducts(SearchProductDto searchProductDto) {
         if (nonNull(searchProductDto)) {
             Pageable pageable = resolvePageable(searchProductDto);
-            Page<Product> searchedProducts = productRepository.findAll(pageable);
+            Page<Product> searchedProducts = productRepository.findProductsByFilters(
+                    searchProductDto.name(),
+                    searchProductDto.minPriceEur(),
+                    searchProductDto.maxPriceEur(),
+                    searchProductDto.minPriceUsd(),
+                    searchProductDto.maxPriceUsd(),
+                    pageable
+            );
 
             return productMapper.toPagedProductResponseDto(searchedProducts);
         }
