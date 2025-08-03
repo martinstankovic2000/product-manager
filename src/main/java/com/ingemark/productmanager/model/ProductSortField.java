@@ -10,4 +10,8 @@ public enum ProductSortField {
     ProductSortField(String field) {
         this.field = field;
     }
+
+    public String getField() {
+        return field;
+    }
 }

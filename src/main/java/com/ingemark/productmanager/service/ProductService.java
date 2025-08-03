@@ -12,6 +12,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+
 import static com.ingemark.productmanager.model.SearchProductDto.DEFAULT_PAGE;
 import static com.ingemark.productmanager.model.SearchProductDto.DEFAULT_SIZE;
 import static java.util.Objects.nonNull;
@@ -32,7 +34,7 @@ public class ProductService {
 
             return productMapper.toPagedProductResponseDto(searchedProducts);
         }
-        Pageable pageable = PageRequest.of(DEFAULT_PAGE, DEFAULT_SIZE, Sort.by(ProductSortField.NAME.name()).ascending());
+        Pageable pageable = PageRequest.of(DEFAULT_PAGE, DEFAULT_SIZE, Sort.by(ProductSortField.NAME.getField()).ascending());
         Page<Product> searchedProducts = productRepository.findAll(pageable);
 
         return productMapper.toPagedProductResponseDto(searchedProducts);
@@ -49,7 +51,7 @@ public class ProductService {
     public ProductResponseDto createProduct(CreateProductDto createProductDto) {
         Product product = productMapper.toEntity(createProductDto);
         //TODO Calculate USD price using HNB API
-        //product.setPriceUsd();
+        product.setPriceUsd(BigDecimal.ONE);
         product.setCode(fromSequence(productRepository.getNextCodeSequence()));
         Product savedProduct = productRepository.save(product);
         return productMapper.toResponseDto(savedProduct);
@@ -67,7 +69,7 @@ public class ProductService {
     }
 
     private Pageable resolvePageable(SearchProductDto searchProductDto) {
-        String sortBy = nonNull(searchProductDto.sortBy()) ? searchProductDto.sortBy().name() : ProductSortField.NAME.name();
+        String sortBy = nonNull(searchProductDto.sortBy()) ? searchProductDto.sortBy().getField() : ProductSortField.NAME.getField();
         Sort sort = searchProductDto.sortAscending() ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
         int page = nonNull(searchProductDto.page()) ? searchProductDto.page() : DEFAULT_PAGE;
         int size = nonNull(searchProductDto.size()) ? searchProductDto.size() : DEFAULT_SIZE;

@@ -10,6 +10,9 @@ spring:
     cache-duration: 3600
     fallback-to-system-locale: false
     always-use-message-format: true
+  sql:
+    init:
+      mode: always
 
   jpa:
     hibernate:
