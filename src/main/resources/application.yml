@@ -35,6 +35,14 @@ app:
   jwtSecret: ${JWT_SECRET}
   jwtExpirationInMs: ${JWT_DURATION}
 
+logging:
+  file:
+    name: logs/app.log
+  pattern:
+    file: "%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n"
+  level:
+    root: WARN
+
 # HNB API
 hnb:
   api:

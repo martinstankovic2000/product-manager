@@ -21,6 +21,7 @@ import java.math.RoundingMode;
 @RequiredArgsConstructor
 public class CurrencyService {
     private final RestTemplate restTemplate;
+    private final MessageService messageService;
 
     @Value("${hnb.api.url}")
     private String hnbApiUrl;
@@ -41,7 +42,8 @@ public class CurrencyService {
             BigDecimal exchangeRate = getEurToCurrencyRate(US_CURRENCY);
             return priceEur.multiply(exchangeRate).setScale(2, RoundingMode.HALF_UP);
         } catch (Exception e) {
-            log.warn("Failed to get exchange rate from HNB API, using fallback rate", e);
+            String errorMessage = messageService.getMessage("currency.service.unavailable");
+            log.warn(errorMessage, e);
             return priceEur.multiply(FALLBACK_RATE).setScale(2, RoundingMode.HALF_UP);
         }
     }
