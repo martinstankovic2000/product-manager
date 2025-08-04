@@ -161,7 +161,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0VXNlciIsImlhdCI6MTc1NDI1OTM0NSwiZXhwIjoxNzU0MzQ1NzQ1fQ.91v_2qOf3yOvROOT6hC_0JcWFXw8V_81c4l1F8IUXuU",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1NDI2MzEyNiwiZXhwIjoxNzU0MzQ5NTI2fQ.pbmfzcbuflJgN0RXHBWDESbqwsa7PdwAQlCJ5Zhxpok",
 							"type": "string"
 						}
 					]
@@ -170,7 +170,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "",
+					"raw": "{\r\n  \r\n  \"minPriceEur\": 10.00,\r\n  \"page\": 0,\r\n  \"size\": 10,\r\n  \"sortBy\": \"PRICE\",\r\n  \"sortAscending\": false\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -211,11 +211,21 @@
 				}
 			],
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc1NDI2MTM2NywiZXhwIjoxNzU0MzQ3NzY3fQ.HhPtwZDLJMRCqaTS2D7wJTPlrOifsVLpmQ3Ep8M2KQE",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"name\": \"Test\",\n    \"priceEur\": 111,\n    \"isAvailable\": true\n}",
+					"raw": "{\n\t\"name\": \"Laptop\",\n    \"priceEur\": 399,\n    \"isAvailable\": true\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -349,7 +359,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"name\": \"Banana\",\n    \"priceEur\": 0.6,\n    \"isAvailable\": false\n}",
+					"raw": "{\n\t\"username\": \"admin\",\n    \"password\": \"admin\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
