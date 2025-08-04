@@ -98,6 +98,8 @@ Username: admin
 Password: admin
 
 ## API Endpoints
+
+Optional add 'Accept-Language' header with value 'hr' for responses in Croatian
 ### Authentication
 POST /api/auth/register
 Content-Type: application/json
