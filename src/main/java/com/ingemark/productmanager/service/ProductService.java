@@ -23,6 +23,10 @@ import static com.ingemark.productmanager.model.product.request.SearchProductDto
 import static com.ingemark.productmanager.model.product.request.SearchProductDto.DEFAULT_SIZE;
 import static java.util.Objects.nonNull;
 
+/**
+ * Service class to manage product business logic.
+ * Handles creating, updating, deleting, and searching products.
+ */
 @Service
 @RequiredArgsConstructor
 public class ProductService {
@@ -31,7 +35,12 @@ public class ProductService {
     private final ProductMapper productMapper;
     private final CurrencyService currencyService;
 
-
+    /**
+     * Searches products based on filter criteria with pagination.
+     *
+     * @param searchProductDto Search filters and pagination info; if null, returns all with default pagination.
+     * @return Paged response with matching products.
+     */
     @Transactional(readOnly = true)
     public PagedProductResponseDto searchProducts(SearchProductDto searchProductDto) {
         if (nonNull(searchProductDto)) {
@@ -53,6 +62,13 @@ public class ProductService {
         return productMapper.toPagedProductResponseDto(searchedProducts);
     }
 
+    /**
+     * Finds a product by its unique code.
+     *
+     * @param code Unique product code.
+     * @return Product response DTO.
+     * @throws ProductNotFoundException if no product with the code is found.
+     */
     @Transactional(readOnly = true)
     public ProductResponseDto getProductByCode(String code) {
         Product product = productRepository.findByCode(code)
@@ -60,6 +76,13 @@ public class ProductService {
         return productMapper.toResponseDto(product);
     }
 
+    /**
+     * Creates a new product.
+     * Generates a unique code for the product and calculates the USD price.
+     *
+     * @param createProductDto DTO with creation details.
+     * @return Created product response DTO.
+     */
     @Transactional
     public ProductResponseDto createProduct(CreateProductDto createProductDto) {
         Product product = productMapper.toEntity(createProductDto);
@@ -69,6 +92,14 @@ public class ProductService {
         return productMapper.toResponseDto(savedProduct);
     }
 
+    /**
+     * Updates a product identified by code with new data.
+     *
+     * @param code Product code.
+     * @param updateProductDto DTO with updated product data.
+     * @return Updated product response DTO.
+     * @throws ProductNotFoundException if product does not exist.
+     */
     @Transactional
     public ProductResponseDto updateProductByCode(String code, @Valid UpdateProductDto updateProductDto) {
         Product product = productRepository.findByCode(code)
@@ -80,6 +111,12 @@ public class ProductService {
         return productMapper.toResponseDto(product);
     }
 
+    /**
+     * Deletes a product identified by its code.
+     *
+     * @param code Product code.
+     * @throws ProductNotFoundException if product does not exist.
+     */
     @Transactional
     public void deleteProductByCode(String code) {
         Product product = productRepository.findByCode(code)

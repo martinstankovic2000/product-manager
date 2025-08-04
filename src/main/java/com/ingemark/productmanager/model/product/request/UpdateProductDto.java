@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 public record UpdateProductDto(
-        @NotBlank(message = "{product.name.blank}")
+        @NotBlank(message = "{product.name.required}")
         String name,
 
         @NotNull(message = "{product.price.required}")

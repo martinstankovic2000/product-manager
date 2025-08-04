@@ -9,9 +9,18 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * Mapper class responsible for converting between Product entities and DTOs.
+ */
 @Component
 public class ProductMapper {
 
+    /**
+     * Converts a CreateProductDto to a Product entity.
+     *
+     * @param createDto the DTO containing product creation data
+     * @return a new Product entity populated from the DTO
+     */
     public Product toEntity(CreateProductDto createDto) {
         return Product.builder()
                 .name(createDto.name())
@@ -20,6 +29,12 @@ public class ProductMapper {
                 .build();
     }
 
+    /**
+     * Converts a Product entity to a ProductResponseDto.
+     *
+     * @param product the Product entity to convert
+     * @return a ProductResponseDto representing the entity
+     */
     public ProductResponseDto toResponseDto(Product product) {
         return new ProductResponseDto(
                 product.getName(),
@@ -31,6 +46,12 @@ public class ProductMapper {
 
     }
 
+    /**
+     * Converts a Page of Product entities to a paged response DTO.
+     *
+     * @param products a Page of Product entities
+     * @return a PagedProductResponseDto containing the mapped products and pagination info
+     */
     public PagedProductResponseDto toPagedProductResponseDto(Page<Product> products) {
         List<ProductResponseDto> content = products.getContent()
                 .stream()

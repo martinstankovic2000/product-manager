@@ -14,6 +14,10 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
+/**
+ * Handles AccessDeniedException by returning a custom JSON error response
+ * with HTTP status 403 Forbidden and a localized error message.
+ */
 @Component
 @RequiredArgsConstructor
 public class CustomAccessDeniedHandler implements AccessDeniedHandler {
@@ -21,6 +25,15 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
     private final MessageService messageService;
     private final ObjectMapper objectMapper;
 
+    /**
+     * Handles access denied exceptions by setting the response status and body
+     * with a JSON error message.
+     *
+     * @param request  the HttpServletRequest
+     * @param response the HttpServletResponse
+     * @param accessDeniedException the exception thrown when access is denied
+     * @throws IOException if an input or output exception occurs
+     */
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response,
                        AccessDeniedException accessDeniedException) throws IOException {

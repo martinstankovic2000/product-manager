@@ -18,6 +18,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+
+/**
+ * Security configuration class that defines security filters, authentication, authorization,
+ * and password encoding for the application.
+ */
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
@@ -28,16 +33,36 @@ public class SecurityConfig {
     private final JwtRequestFilter jwtRequestFilter;
     private final CustomAccessDeniedHandler accessDeniedHandler;
 
+    /**
+     * Password encoder bean that uses BCrypt hashing.
+     *
+     * @return the PasswordEncoder bean
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    /**
+     * Provides the AuthenticationManager bean used for authentication.
+     *
+     * @param config the AuthenticationConfiguration
+     * @return the AuthenticationManager
+     * @throws Exception if authentication manager cannot be created
+     */
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
 
+    /**
+     * Configures the security filter chain, including CSRF disabling, request authorization rules,
+     * exception handling, session management, and JWT filter registration.
+     *
+     * @param http the HttpSecurity object to configure
+     * @return the configured SecurityFilterChain
+     * @throws Exception if an error occurs during configuration
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())

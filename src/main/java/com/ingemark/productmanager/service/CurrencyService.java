@@ -12,6 +12,11 @@ import org.springframework.web.client.RestTemplate;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+/**
+ * Service to handle currency conversion.
+ * Fetches EUR to USD exchange rate from HNB API and calculates USD price.
+ * Falls back to a predefined rate on API failure.
+ */
 @Service
 @RequiredArgsConstructor
 public class CurrencyService {
@@ -24,6 +29,13 @@ public class CurrencyService {
     private static final String US_CURRENCY = "USD";
     private static final Logger log = LoggerFactory.getLogger(CurrencyService.class);
 
+    /**
+     * Calculates the USD price for a given EUR price using the latest exchange rate.
+     * Falls back to a fixed rate if the external API is unavailable.
+     *
+     * @param priceEur Price in EUR.
+     * @return Equivalent price in USD, rounded to 2 decimals.
+     */
     public BigDecimal calculateUsdPrice(BigDecimal priceEur) {
         try {
             BigDecimal exchangeRate = getEurToCurrencyRate(US_CURRENCY);
@@ -34,6 +46,13 @@ public class CurrencyService {
         }
     }
 
+    /**
+     * Retrieves EUR to target currency exchange rate from HNB API.
+     *
+     * @param currency Target currency code (e.g., "USD").
+     * @return Exchange rate as BigDecimal.
+     * @throws IllegalStateException if no exchange rate data is returned.
+     */
     private BigDecimal getEurToCurrencyRate(String currency) {
         ResponseEntity<HnbRateResponse[]> response = restTemplate.getForEntity(hnbApiUrl + currency, HnbRateResponse[].class);
         HnbRateResponse[] rates = response.getBody();
