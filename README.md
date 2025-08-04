@@ -98,7 +98,7 @@ Username: admin
 Password: admin
 
 ## API Endpoints
-
+### Postman collection used for testing is included
 Optional add 'Accept-Language' header with value 'hr' for responses in Croatian
 ### Authentication
 POST /api/auth/register
