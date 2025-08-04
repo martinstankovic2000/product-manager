@@ -3,7 +3,7 @@ package com.ingemark.productmanager.model.product;
 
 public enum ProductSortField {
     NAME("name"),
-    PRICE("price");
+    PRICE("priceEur");
 
     private final String field;
 

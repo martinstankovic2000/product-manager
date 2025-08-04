@@ -1,7 +1,6 @@
 package com.ingemark.productmanager.controller;
 
 import com.ingemark.productmanager.model.product.request.CreateProductDto;
-
 import com.ingemark.productmanager.model.product.request.UpdateProductDto;
 import com.ingemark.productmanager.model.product.response.PagedProductResponseDto;
 import com.ingemark.productmanager.model.product.response.ProductResponseDto;
@@ -13,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
 
 
 @RestController
@@ -59,5 +57,4 @@ public class ProductController {
         productService.deleteProductByCode(code);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
-
 }
